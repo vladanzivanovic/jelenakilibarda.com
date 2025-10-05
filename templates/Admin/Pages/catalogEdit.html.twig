@@ -1,0 +1,48 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% set title = 'Galerija' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block bodyClass %}catalog-edit{% endblock %}
+
+{% block content %}
+    {% include 'Admin/Components/breadcrumbs.html.twig' with {
+        activePage: title,
+        pages: [
+            {routeName: 'admin.catalog_page', name: 'Slike'}
+        ]
+    } %}
+
+    {% import 'Admin/Macros/Inputs/formWithLabels.html.twig' as form %}
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <div>
+            <h4 class="mb-3 mb-md-0">Slike - 1060x1580</h4>
+        </div>
+    </div>
+
+    <form id="edit_form" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Slike</h6>
+                        <div class="row">
+                            {% include 'Moduls/dropzone.html.twig' with {'dropzoneName': 'catalog', 'class': 'dropzone-dark w-100', 'maxFiles': 0} %}
+                        </div><!--Row-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    {{ form.button('catalog_submit', 'btn btn-outline-primary submit', 'Sačuvaj', 'button') }}
+{% endblock %}
+{% block pageJavascript %}
+    <script nonce="{{ csp_nonce('script') }}">
+        const CAN_VIEW = true;
+        const CAN_EDIT = true;
+        const CAN_REMOVE = true;
+
+        const IMAGES = JSON.parse('{{ selectedImages|json_encode()|raw }}');
+    </script>
+{% endblock %}

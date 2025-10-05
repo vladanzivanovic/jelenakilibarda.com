@@ -1,0 +1,95 @@
+<!-- Navigation panel -->
+<nav class="main-nav dark stick-fixed wow-menubar">
+    <div class="full-wrapper relative clearfix">
+
+        <!-- Logo ( * your text or image into link tag *) -->
+        <div class="nav-logo-wrap local-scroll">
+            <a href="{{ path('site.home_page') }}" class="logo">
+                Jelena Kilibarda
+{#                <img src="images/logo-dark.png" alt="Company logo" width="188" height="37" />#}
+            </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="mobile-nav" role="button" tabindex="0">
+            <i class="fa fa-bars"></i>
+            <span class="sr-only">Menu</span>
+        </div>
+
+        <!-- Mobile Cart -->
+{#        <a href="shop-cart.html" class="mobile-cart"><i class="main-nav-icon-cart"></i> (0)</a>#}
+
+        <!-- Main Menu -->
+        <div class="inner-nav desktop-nav">
+            <ul class="clearlist">
+
+                <li>
+                    <a href="{{ path('site.home_page') }}" class="{{ routeName == 'site.home_page' ? 'active' : '' }}">{{ 'navi.home' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('site.biography_page') }}" class="{{ routeName == 'site.biography_page' ? 'active' : '' }}">{{ 'navi.biography' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('site.repertoire_page') }}" class="{{ routeName == 'site.repertoire_page' ? 'active' : '' }}">{{ 'navi.repertoire' | trans }}</a>
+                </li>
+                <li>
+                    <a href="{{ path('site.piano_duo_page') }}" class="{{ routeName == 'site.piano_duo_page' ? 'active' : '' }}">{{ 'navi.piano_duo' | trans }}</a>
+                </li>
+
+                <!-- Item With Sub -->
+                <li>
+                    <a href="#" class="mn-has-sub {{ routeName in ['site.gallery_page', 'site.video_page'] ? 'active' : '' }}">{{ 'navi.gallery' | trans }} <i class="mn-has-sub-icon"></i></a>
+
+                    <!-- Sub Multilevel -->
+                    <ul class="mn-sub mn-has-multi">
+
+                        <li class="mn-sub-multi">
+                            <ul>
+                                <li>
+                                    <a href="{{ path('site.gallery_page') }}" class="mn-group-title {{ routeName == 'site.gallery_page' ? 'active' : '' }}">{{ 'navi.images' | trans }}</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('site.video_page') }}" class="mn-group-title {{ routeName == 'site.video_page' ? 'active' : '' }}">{{ 'navi.video' | trans }}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Item With Sub -->
+
+{#                <!-- Item With Sub -->#}
+{#                <li>#}
+{#                    <a href="{{ path('site.contact_page') }}">{{ 'navi.contact' | trans }}</a>#}
+{#                </li>#}
+{#                <!-- End Item With Sub -->#}
+                <!-- Divider -->
+                <li><a>&nbsp;</a></li>
+                <!-- End Divider -->
+                <!-- Languages -->
+                <li>
+                    {% for language in languages %}
+                        {% if locale == language.code %}
+                            <a href="#" class="mn-has-sub">{{ ('language.'~language.code) | trans }} <i class="mn-has-sub-icon"></i></a>
+                        {% endif %}
+                    {% endfor %}
+
+                    <ul class="mn-sub">
+                        {% for localeCode, language in transUrls %}
+                            {% if locale != localeCode %}
+                                <li>
+                                    <a id="locale_{{ language.code }}" data-locale-code="{{ language.code }}" href="{{ language.url }}">{{ ('language.'~language.code) | trans }}</a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+
+                </li>
+                <!-- End Languages -->
+
+            </ul>
+        </div>
+        <!-- End Main Menu -->
+
+    </div>
+</nav>
+<!-- End Navigation panel -->

@@ -1,0 +1,51 @@
+navi.home: Početna
+navi.biography: Biografija
+navi.repertoire: Repertoar
+navi.piano_duo: Klavirski duo
+navi.gallery: Galerija
+navi.images: Slike
+navi.video: Video
+navi.contact: Kontakt
+
+language.rs: Srpski
+language.en: Engleski
+
+pending: na čekanju
+active: aktivan
+disabled: zaključan
+
+all_videos: Svi video snimci
+all_images: Sve slike
+
+contact.telephone.mobile: Mobilni telefon
+contact.see_on_map: Pogledajte lokaciju
+contact.message.success: Uspešno ste poslali upit.
+
+address: Adresa
+email: Email adresa
+message: Poruka
+last_name: Prezime
+first_name: Ime
+submit: Pošalji
+
+required_star_field: Polja sa * su obavezna
+
+all_rights: Sva prava su zadržana.
+
+default_title: Jelena Kilibarda Biografija
+
+notifications.please_wait: Molimo vas sačekajte.
+
+login.successful: Uspešno ste se ulogovali
+
+text.type.biography: Biografija
+text.type.repertoire: Repertoar
+text.type.piano_duo: Klavirski duo
+
+eu.cookies.accept.title: '%siteName% - sigurni kolačići.'
+eu.cookies.accept.text: Da bi omogućili korisnicima lakše i ugodnije korištenje naše stranice koristimo kolačiće (Cookies). Koristeći stranicu %siteName% pristajete na upotrebu kolačića.
+eu.cookies.accept.btn: Pristajem
+eu.cookies.learn_more.btn: Više o kolačićima
+eu.cookies.checkbox.required: Obavezni kolačići
+eu.cookies.checkbox.analytics: Statiskički kolačići
+eu.cookies.select_cookies_title: Izaberite kolačiće

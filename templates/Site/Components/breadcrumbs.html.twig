@@ -1,0 +1,11 @@
+<div class="mod-breadcrumbs text-end">
+    <a href="{{ path('site.home_page') }}">{{ 'navi.home' | trans }}</a>
+    {% if pages is defined %}
+        {% for page in pages %}
+            <span class="mod-breadcrumbs-slash">•</span>&nbsp;
+            <a href="{{ path(page.routeName) }}">{{ page.name }}</a>&nbsp;
+        {% endfor %}
+    {% endif %}
+    <span class="mod-breadcrumbs-slash">•</span>&nbsp;
+    <span>{{ activePage }}</span>
+</div>

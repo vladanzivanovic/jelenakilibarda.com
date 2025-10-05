@@ -1,0 +1,83 @@
+{% extends ('Site/base.html.twig') %}
+
+{% block bodyClass %}videos{% endblock %}
+
+{% block content %}
+    <main id="main">
+        <!-- Home Section -->
+        {% set bgImage = asset('build/site/images/background/section-bg-19.jpg') %}
+
+        {% if slider is not null %}
+            {% set bgImage = slider.image_link %}
+        {% endif %}
+
+        <section class="page-section bg-dark-alfa-50 bg-scroll" data-background="{{ bgImage }}" id="home">
+            <div class="container relative">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="wow fadeInUpShort" data-wow-delay=".1s">
+                            <h1 class="hs-line-7 mb-20 mb-xs-10">{{ 'navi.video' | trans }}</h1>
+                        </div>
+                        {#                        <div class="wow fadeInUpShort" data-wow-delay=".2s">#}
+                        {#                            <p class="hs-line-6 opacity-075 mb-20 mb-xs-0">#}
+                        {#                                Extraordinary art team &&nbsp;creative minimalism lovers#}
+                        {#                            </p>#}
+                        {#                        </div>#}
+                    </div>
+
+                    <div class="col-md-4 mt-30 wow fadeInUpShort" data-wow-delay=".1s">
+                        {% include 'Site/Components/breadcrumbs.html.twig' with {
+                            activePage: 'navi.video' | trans
+                        } %}
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Home Section -->
+
+        <!-- Section -->
+        <section class="page-section mt-30">
+            <div class="container relative">
+
+                <!-- Photo Grid -->
+                <div class="row mb-30 mb-xs-10">
+
+                    {% for video in videos %}
+                        <!-- Post Item -->
+                        <div class="col-sm-6 col-md-4 col-lg-4 mb-md-50">
+
+                            <div class="post-prev-img">
+                                <a href="//www.youtube.com/watch?v={{ video.youtubeId }}" class="lightbox-video-1" tabindex="-1">
+                                    <img src="{{ video.image }}" alt="{{ video.title }}" class="wow scaleOutIn" data-wow-duration="1.2s" />
+                                </a>
+                            </div>
+
+                            <h3 class="post-prev-title">
+                                <a href="//www.youtube.com/watch?v={{ video.youtubeId }}" class="lightbox-video-1">{{ video.title }}</a>
+                            </h3>
+
+                            <div class="post-prev-text">
+                                {{ video.description }}
+                            </div>
+                        </div>
+                        <!-- End Post Item -->
+                    {% endfor %}
+
+                </div>
+                <!-- End Photo Grid -->
+
+            </div>
+        </section>
+        <!-- End Section -->
+
+{#        {{ include('Site/Components/contact.html.twig') }}#}
+
+    </main>
+{% endblock %}
+{% block pageStyleSheets %}
+    {{ encore_entry_link_tags('css/site/pages/gallery') }}
+{% endblock %}

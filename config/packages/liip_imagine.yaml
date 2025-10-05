@@ -1,0 +1,124 @@
+liip_imagine :
+    resolvers:
+        ads_photos:
+            web_path:
+                web_root: "%kernel.project_dir%/storage"
+                cache_prefix: "/cache"
+    loaders:
+        default:
+            filesystem:
+                data_root: "%kernel.project_dir%/storage"
+    filter_sets :
+        #        cache : ads_photos
+        single_thumb :
+            cache: ads_photos
+            quality : 100
+            filters :
+                thumbnail  : { size : [70, 70], mode : outbound }
+                background : { size : [70, 70], position : center, color : '#ffffff' }
+        list_thumb :
+            cache: ads_photos
+            quality : 90
+            filters :
+                thumbnail  : { size : [370, 551], mode : outbound }
+                background : { size : [370, 551], position : center, color : '#ffffff' }
+        gallery_thumbnails_image :
+            cache: ads_photos
+            quality : 100
+            filters :
+                thumbnail: { size: [ 403, 259 ], mode: outbound }
+                background: { size: [ 403, 259 ], position: center, color: '#ffffff' }
+        gallery_full_image :
+            cache: ads_photos
+            quality : 100
+            filters :
+                downscale:
+                    max: [ 1600, 1600 ]
+        product_image_thumb :
+            cache: ads_photos
+            quality : 100
+            filters :
+                relative_resize: {heighten: 140}
+        product_image_large :
+            cache: ads_photos
+            quality : 100
+            filters :
+                relative_resize: {heighten: 600}
+        grid_thumb :
+            cache: ads_photos
+            quality : 90
+            filters :
+                thumbnail  : { size : [256, 381], mode : outbound }
+                background : { size : [256, 381], position : center, color : '#ffffff' }
+        index_thumb_recommended :
+            cache: ads_photos
+            quality : 90
+            filters :
+                thumbnail  : { size : [370, 200], mode : outbound }
+                background : { size : [370, 200], position : center, color : '#ffffff' }
+        cart_thumb :
+            cache: ads_photos
+            quality : 90
+            filters :
+                thumbnail: { size: [96, 107], mode: outbound }
+                background: { size: [96, 107], position: center, color: '#ffffff' }
+        category_single:
+            cache: ads_photos
+            quality : 100
+            filters:
+                downscale:
+                    max: [ 1600, 1600 ]
+        tmp_images :
+            cache: ads_photos
+            quality : 100
+            filters:
+                downscale:
+                    max: [ 1600, 1600 ]
+        summernote_images :
+            cache: ads_photos
+            quality : 100
+            filters:
+                downscale:
+                    max: [ 1000, 1000 ]
+        blog_image_list :
+            cache: ads_photos
+            quality : 100
+            filters:
+                thumbnail: { size: [870, 342], mode: outbound }
+                background: { size: [870, 342], position: center, color: '#ffffff' }
+        tmp_image_thumb :
+            cache: ads_photos
+            quality : 100
+            filters :
+                downscale:
+                    max: [ 300, 300 ]
+        admin_slider_list :
+            cache: ads_photos
+            quality : 75
+            filters :
+                downscale:
+                    max: [ 200, 200 ]
+        site_slider :
+            cache: ads_photos
+            quality : 80
+            filters :
+                downscale:
+                    max: [ 1920, 1080 ]
+        site_slider_mobile :
+            cache: ads_photos
+            quality : 80
+            filters :
+                downscale:
+                    max: [ 500, 439 ]
+        blog_list :
+            cache: ads_photos
+            quality : 100
+            filters :
+                downscale:
+                    max: [ 860, 351 ]
+        news_letter_banner_mobile :
+            cache: ads_photos
+            quality : 100
+            filters :
+                thumbnail: { size: [600, 800], mode: outbound }
+                background: { size: [600, 800], position: center, color: '#ffffff' }

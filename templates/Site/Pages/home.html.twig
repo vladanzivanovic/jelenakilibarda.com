@@ -1,0 +1,161 @@
+{% extends ('Site/base.html.twig') %}
+
+{% block bodyClass %}home{% endblock %}
+
+{% block content %}
+    <main id="main">
+
+        {% if slider is not null %}
+            <!-- Home Section -->
+            <section class="home-section bg-light-alfa-50 parallax-5" data-background="{{ slider.image_link }}" id="home">
+                <div class="container min-height-100vh d-flex align-items-center pt-100 pb-100">
+
+                    <!-- Hero Content -->
+                    <div class="home-content">
+                        {% if slider['description'][0] is defined %}
+                        <div class="wow fadeInUpShort" data-wow-delay=".1s">
+                            <h1 class="hs-line-1 opacity-09 mb-70 mb-sm-40">{{ slider['description'][0] }}</h1>
+                        </div>
+                        {% endif %}
+                        {% if slider['description'][1] is defined %}
+                        <div class="wow fadeInUpShort" data-wow-delay=".2s">
+                            <p class="hs-line-6 opacity-07">
+                                {{ slider['description'][1] }}
+                            </p>
+                        </div>
+                        {% endif %}
+                        {% if slider['description'][2] is defined %}
+                        <div class="wow fadeInUpShort" data-wow-delay=".2s">
+                            <p class="hs-line-6 opacity-07">
+                                {{ slider['description'][2] }}
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <!-- End Hero Content -->
+
+{#                    <!-- Scroll Down -->#}
+{#                    <div class="local-scroll scroll-down-wrap wow fadeInUpShort" data-wow-offset="0">#}
+{#                        <a href="#about" class="scroll-down opacity-085"><i class="scroll-down-icon"></i><span class="sr-only">Scroll to the next section</span></a>#}
+{#                    </div>#}
+{#                    <!-- End Scroll Down -->#}
+
+                </div>
+            </section>
+            <!-- End Home Section -->
+        {% endif %}
+
+
+
+{#        {% if biography is not null and biography.short_description is not null %}#}
+{#            <!-- Biography Section -->#}
+{#            <section class="page-section" id="about">#}
+{#                <div class="container relative">#}
+{#                    <div>#}
+{#                        <div class="row blog-item">#}
+{#                            <div class="col-md-12 mb-sm-50 mb-xs-30 wow linesAnimIn" data-splitting="lines">#}
+{#                                {{ biography.short_description | raw }}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </section>#}
+{#            <!-- End Biography Section -->#}
+{#        {% endif %}#}
+
+{#        <!-- Divider -->#}
+{#        <hr class="mt-0 mb-0"/>#}
+{#        <!-- End Divider -->#}
+
+
+{#        <!-- Gallery Section -->#}
+{#        <section class="page-section bg-dark light-content">#}
+{#            <div class="container relative">#}
+
+{#                <div class="text-center">#}
+{#                    <div class="row">#}
+{#                        <div class="col-sm-6 offset-sm-3">#}
+{#                            <h2 class="section-title">{{ 'navi.gallery' | trans }}</h2>#}
+{#                        </div>#}
+{#                        <div class="col-sm-3 text-sm-end pt-30 pt-xs-0">#}
+{#                            <a href="{{ path('site.gallery_page') }}" class="section-more">{{ 'all_images' | trans }}<i class="fa fa-angle-right" aria-hidden="true"></i></a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <!-- Photo Grid -->#}
+{#                <div class="row mb-30 mb-xs-10 pt-5">#}
+{#                    {% if images is not null %}#}
+{#                        {% for image in images %}#}
+{#                            <!-- Photo Item -->#}
+{#                            <div class="col-md-4">#}
+
+{#                                <div class="post-prev-img mb-30 wow fadeScaleIn" data-wow-duration="1s">#}
+{#                                    <a href="{{ image.file }}" class="lightbox-gallery-2 mfp-image">#}
+{#                                        <img src="{{ image.thumb_image }}" alt="{{ default_alt_tag }}" />#}
+{#                                    </a>#}
+{#                                </div>#}
+
+{#                            </div>#}
+{#                            <!-- End Photo Item -->#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#                <!-- End Photo Grid -->#}
+
+{#            </div>#}
+{#        </section>#}
+{#        <!-- End Gallery Section -->#}
+
+
+{#        <!-- Video Section -->#}
+{#        <section class="page-section" id="blog">#}
+{#            <div class="container relative">#}
+
+{#                <div class="text-center">#}
+{#                    <div class="row">#}
+{#                        <div class="col-sm-6 offset-sm-3">#}
+{#                            <h2 class="section-title">{{ 'navi.video' | trans }}</h2>#}
+{#                        </div>#}
+{#                        <div class="col-sm-3 text-sm-end pt-30 pt-xs-0">#}
+{#                            <a href="{{ path('site.video_page') }}" class="section-more">{{ 'all_videos' | trans }}<i class="fa fa-angle-right" aria-hidden="true"></i></a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+
+{#                <div class="row pt-5">#}
+
+{#                    {% if videos is not null %}#}
+{#                        {% for video in videos %}#}
+{#                            <!-- Post Item -->#}
+{#                            <div class="col-sm-6 col-md-4 col-lg-4 mb-md-50">#}
+
+{#                                <div class="post-prev-img">#}
+{#                                    <a href="//www.youtube.com/watch?v={{ video.youtubeId }}" class="lightbox-video-1" tabindex="-1">#}
+{#                                        <img src="{{ video.image }}" alt="{{ video.title }}" class="wow scaleOutIn" data-wow-duration="1.2s" />#}
+{#                                    </a>#}
+{#                                </div>#}
+
+{#                                <h3 class="post-prev-title">#}
+{#                                    <a href="//www.youtube.com/watch?v={{ video.youtubeId }}" class="lightbox-video-1">{{ video.title }}</a>#}
+{#                                </h3>#}
+
+{#                                <div class="post-prev-text">#}
+{#                                    {{ video.description }}#}
+{#                                </div>#}
+{#                            </div>#}
+{#                            <!-- End Post Item -->#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                </div>#}
+
+{#            </div>#}
+{#        </section>#}
+{#        <!-- End Videos Section -->#}
+
+{#        {{ include('Site/Components/contact.html.twig') }}#}
+    </main>
+{% endblock %}
+{% block pageStyleSheets %}
+    {{ encore_entry_link_tags('css/site/pages/home') }}
+{% endblock %}

@@ -1,0 +1,68 @@
+@import '../../../node_modules/bootstrap5/dist/css/bootstrap.min.css';
+@import "../css/style.css";
+@import "../css/style-responsive.css";
+@import "../css/vertical-rhythm.min.css";
+
+@import "colors";
+
+@import "~gdpr-cookie/gdpr-cookie.css";
+
+.gdprcookie {
+  background: $popup-bg-color;
+  border-radius: 3px;
+  box-shadow: 0 0 20px #000;
+  transition: all 0.5s ease 0s;
+  z-index: 9999;
+  max-width: 35em;
+  color: $black-color;
+
+  .gdprcookie-intro\/ {
+    > h1 {
+      color: $black-color;
+      line-height: inherit;
+      padding: 0.5rem 0 1.2rem 0;
+    }
+  }
+
+  h2 {
+    color: $black-color;
+  }
+
+  p {
+    font-family: inherit;
+  }
+
+  .gdprcookie-buttons\/ {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      background: $black-color;
+      border: 0 none;
+      color: #e5e5e5;
+      font-size: 13px;
+      height: 40px;
+      letter-spacing: 0;
+      padding: 0 25px;
+
+      &:nth-of-type(2) {
+        display: none;
+      }
+    }
+  }
+
+  .gdprcookie-types\/ {
+    > ul {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+
+      li {
+        > label {
+          padding-left: 13px;
+        }
+      }
+    }
+  }
+}

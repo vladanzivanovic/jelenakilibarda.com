@@ -1,0 +1,172 @@
+{% extends ('Site/base.html.twig') %}
+
+{% block bodyClass %}contact{% endblock %}
+
+{% block content %}
+    {% import 'Admin/Macros/Inputs/formWithLabels.html.twig' as form %}
+
+    <main id="main">
+        <!-- Home Section -->
+        {% set bgImage = asset('build/site/images/background/section-bg-19.jpg') %}
+
+        {% if slider is not null %}
+            {% set bgImage = slider.image_link %}
+        {% endif %}
+
+        <!-- Home Section -->
+        <section class="page-section bg-dark-alfa-50 bg-scroll" data-background="{{ bgImage }}" id="home">
+            <div class="container relative">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="wow fadeInUpShort" data-wow-delay=".1s">
+                            <h1 class="hs-line-7 mb-20 mb-xs-10">{{ 'navi.contact' | trans }}</h1>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-30 wow fadeInUpShort" data-wow-delay=".1s">
+                        {% include 'Site/Components/breadcrumbs.html.twig' with {
+                            activePage: 'navi.contact' | trans
+                        } %}
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Home Section -->
+
+
+        <!-- Contact Section -->
+        <section class="page-section">
+            <div class="container relative">
+
+                <div class="row mb-60 mb-xs-40">
+
+                    <div class="col-md-10 offset-md-1">
+                        <div class="row">
+
+                            <!-- Phone -->
+                            <div class="col-sm-6 col-lg-4 pb-20">
+                                <div class="contact-item wow fadeScaleIn" data-wow-delay="0" data-wow-duration="1s">
+                                    <div class="ci-icon">
+                                        <i class="fa fa-phone-alt"></i>
+                                    </div>
+                                    <div class="ci-title">
+                                        {{ 'contact.telephone.mobile' | trans }}
+                                    </div>
+                                    <div class="ci-text">
+                                        {{ settings.MOBILE_PHONE }}
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Phone -->
+
+                            <!-- Address -->
+                            <div class="col-sm-6 col-lg-4 pb-20">
+                                <div class="contact-item wow fadeScaleIn" data-wow-delay=".1s" data-wow-duration="1s">
+                                    <div class="ci-icon">
+                                        <i class="fa fa-map-marker-alt"></i>
+                                    </div>
+                                    <div class="ci-title">
+                                        {{ 'address' | trans }}
+                                    </div>
+                                    <div class="ci-text">
+                                        {{ settings.STREET ~', '~ settings.ZIP_CODE ~ ' ' ~ settings.CITY }}
+                                    </div>
+                                    <div class="ci-link">
+                                        <a href="https://www.google.com/maps/place/{{ settings.STREET ~', '~ settings.ZIP_CODE ~ ' ' ~ settings.CITY }}" target="_blank">{{ 'contact.see_on_map' | trans }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Address -->
+
+                            <!-- Email -->
+                            <div class="col-sm-6 col-lg-4 pb-20">
+                                <div class="contact-item wow fadeScaleIn" data-wow-delay=".2s" data-wow-duration="1s">
+                                    <div class="ci-icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <div class="ci-title">
+                                        {{ 'email' | trans }}
+                                    </div>
+                                    <div class="ci-text">
+                                        {{ settings.MAIN_EMAIL }}
+                                    </div>
+{#                                    <div class="ci-link">#}
+{#                                        <a href="mailto:support@bestlooker.pro">Say Hello</a>#}
+{#                                    </div>#}
+                                </div>
+                            </div>
+                            <!-- End Email -->
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Contact Form -->
+                <div class="row">
+                    <div class="col-md-10 offset-md-1">
+
+                        <form class="form contact-form wow fadeInUpShort" id="contact_form">
+                            <input id="_csrf_token" type="hidden" name="_csrf_token" value="{{ csrf_token('ask_us_form') }}" />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <!-- Name -->
+                                    <div class="form-group">
+                                        {{ form.input('first_name' | trans ~ ' *', 'first_name', '', 'first_name', '', 'text', 'pattern=".{3,100}" required aria-required="true"', 'input-lg round form-control', '') }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Name -->
+                                    <div class="form-group">
+                                        {{ form.input('last_name' | trans ~ ' *', 'last_name', '', 'last_name', '', 'text', 'pattern=".{3,100}" required aria-required="true"', 'input-lg round form-control', '') }}
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        {{ form.input('email' | trans ~ ' *', 'email', '', 'email', '', 'email', null, 'input-lg round form-control', '') }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="form-group">
+                                {{ form.textarea('message' | trans ~ ' *', 'note', '', 'note', 10, '', 'input-lg round form-control') }}
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <!-- Inform Tip -->
+                                    <div class="form-tip pt-20 pt-sm-0 mb-sm-20">
+                                        {{ 'required_star_field' | trans }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <!-- Send Button -->
+                                    <div class="text-end pt-10">
+                                        {{ form.button('ask_us_submit', 'submit_btn btn btn-mod btn-large btn-round', 'submit' | trans, 'button') }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="result" role="region" aria-live="polite" aria-atomic="true"></div>
+
+                        </form>
+
+                    </div>
+                </div>
+                <!-- End Contact Form -->
+
+            </div>
+        </section>
+        <!-- End Contact Section -->
+
+    </main>
+{% endblock %}
+{% block pageStyleSheets %}
+    {{ encore_entry_link_tags('css/site/pages/gallery') }}
+{% endblock %}

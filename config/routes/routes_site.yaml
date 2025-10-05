@@ -1,0 +1,76 @@
+site.loyalty:
+  path:
+    hr: /loyalty
+    de: /de/loyalty
+    en: /en/loyalty
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/loyalty.html.twig
+
+site.collaborator:
+  path:
+    hr: /saradnici
+    de: /de/kollaborateur
+    en: /en/collaborators
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/collaborator.html.twig
+
+site.policy_page:
+  path:
+    hr: /politika-privatnosti
+    de: /de/datenschutz-bestimmungen
+    en: /en/privacy-policy
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/privacy_policy.html.twig
+  options:
+    expose: true
+
+site.cookie_policy:
+  path:
+    hr: /politika-kolacica
+    de: /de/cookie-politik
+    en: /en/cookie-policy
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/cookie_policy.html.twig
+  options:
+    expose: true
+
+site.use_conditions:
+  path:
+    hr: /uslovi-koriscenja
+    de: /de/einsatz-bedingungen
+    en: /en/use-conditions
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/use_condition.html.twig
+
+site.ask_us:
+  path:
+    hr: /pitajte-nas
+    de: /de/ask-us
+    en: /en/ask-us
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/askUsPage.html.twig
+
+site.logout:
+  path: /logout
+
+site.not_exists_page:
+  path:
+    hr: /nepostojeca-stranica
+    de: /de/not-exists-seite
+    en: /en/not-exists-page
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/Pages/404Page.html.twig
+
+site.robots:
+  path: /robots.txt
+  controller: Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+  defaults:
+    template: Site/robots.txt.twig
+

@@ -1,0 +1,51 @@
+navi.home: Home
+navi.biography: Biography
+navi.repertoire: Repertoire
+navi.piano_duo: Piano duo
+navi.gallery: Gallery
+navi.images: Images
+navi.video: Video
+navi.contact: Contact
+
+language.rs: Serbian
+language.en: English
+
+pending: pending
+active: active
+disabled: disabled
+
+all_videos: All videos
+all_images: All images
+
+contact.telephone.mobile: Mobile phone
+contact.see_on_map: View location
+contact.message.success: You are succesfully submit form.
+
+address: Address
+email: Email address
+message: Message
+last_name: Surname
+first_name: First name
+submit: Send
+
+required_star_field: Fields with * are mandatory
+
+all_rights: All rights reserved.
+
+default_title: Jelena Kilibarda Biography
+
+notifications.please_wait: Please wait.
+
+login.successful: You are successfully login.
+
+text.type.biography: Biography
+text.type.repertoire: Repertoire
+text.type.piano_duo: Piano duo
+
+eu.cookies.accept.title: '%siteName% - safe cookies.'
+eu.cookies.accept.text: 'To be able to give easier and comfortable usage of our website, we are using cookies. By using %siteName% you are accepting our cookie policy.'
+eu.cookies.accept.btn: Accept
+eu.cookies.learn_more.btn: About cookies
+eu.cookies.checkbox.required: Mandatory Cookies
+eu.cookies.checkbox.analytics: Statistical Cookies
+eu.cookies.select_cookies_title: Select cookies

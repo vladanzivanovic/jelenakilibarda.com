@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+  lamp:
+    build: ./docker/lamp
+    image: lamp
+    container_name: kilibarda-biography-lamp
+    ports:
+      - "9900:80"
+    volumes:
+      - "./:/var/www/html:rw"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mariadb:10
+    container_name: kilibarda-biography-mysql
+    volumes:
+      - "./docker/mysql-mount:/var/lib/mysql:rw"
+    ports:
+      - "9901:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=vlada123!!!
+      - MYSQL_DATABASE=kilibarda_biography_local
+
+  phpmyadmin:
+    depends_on:
+      - mysql
+    image: phpmyadmin/phpmyadmin
+    container_name: kilibarda-biography-phpmyadmin
+    restart: always
+    ports:
+      - '9902:80'
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: vlada123!!!
+
+  mailcatcher:
+    image: schickling/mailcatcher
+    container_name: kilibarda-biography-mailcatcher
+    ports:
+      - "9903:1025" # changed to 1026 to avoid local instance of mailcatcher
+      - "9904:1080"
+
+volumes:
+  mysql-data:

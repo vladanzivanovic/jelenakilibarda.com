@@ -1,0 +1,80 @@
+<!-- Divider -->
+<hr class="mt-0 mb-0"/>
+<!-- End Divider -->
+
+<!-- Contact Section -->
+<section class="page-section" id="contact">
+    <div class="container relative">
+
+        <div class="text-center mb-80 mb-sm-50">
+            <h2 class="section-title">{{ 'navi.contact' | trans }}</h2>
+
+        </div>
+
+        <div class="row mb-60 mb-xs-40">
+
+            <div class="col-md-10 offset-md-1">
+                <div class="row">
+
+{#                    <!-- Phone -->#}
+{#                    <div class="col-sm-6 col-lg-4 pb-20">#}
+{#                        <div class="contact-item wow fadeScaleIn" data-wow-delay="0" data-wow-duration="1s">#}
+{#                            <div class="ci-icon">#}
+{#                                <i class="fa fa-phone-alt"></i>#}
+{#                            </div>#}
+{#                            <div class="ci-title">#}
+{#                                {{ 'contact.telephone.mobile' | trans }}#}
+{#                            </div>#}
+{#                            <div class="ci-text">#}
+{#                                {{ siteSettings.MOBILE_PHONE }}#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <!-- End Phone -->#}
+
+                    <!-- Address -->
+                    <div class="col-sm-6 col-lg-6 pb-20">
+                        <div class="contact-item wow fadeScaleIn" data-wow-delay=".1s" data-wow-duration="1s">
+                            <div class="ci-icon">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                            <div class="ci-title">
+                                {{ 'address' | trans }}
+                            </div>
+                            <div class="ci-text">
+                                {{ siteSettings.STREET ~', '~ siteSettings.ZIP_CODE ~ ' ' ~ siteSettings.CITY }}
+                            </div>
+                            <div class="ci-link">
+                                <a href="https://www.google.com/maps/place/{{ siteSettings.STREET ~', '~ siteSettings.ZIP_CODE ~ ' ' ~ siteSettings.CITY }}" target="_blank">{{ 'contact.see_on_map' | trans }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Address -->
+
+                    <!-- Email -->
+                    <div class="col-sm-6 col-lg-6 pb-20">
+                        <div class="contact-item wow fadeScaleIn" data-wow-delay=".2s" data-wow-duration="1s">
+                            <div class="ci-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="ci-title">
+                                {{ 'email' | trans }}
+                            </div>
+                            <div class="ci-text">
+                                {{ siteSettings.MAIN_EMAIL }}
+                            </div>
+                            <div class="ci-text">
+                                {{ siteSettings.OPTIONAL_EMAIL }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Email -->
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<!-- End Contact Section -->

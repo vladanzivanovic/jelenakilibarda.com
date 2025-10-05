@@ -1,0 +1,102 @@
+{% extends 'Admin/base.html.twig' %}
+
+{% set IS_EDIT = app.request.attributes.get('_route') == 'admin.edit_video_page' %}
+
+{% set titlePrefix = IS_EDIT == true ? 'Izmena' : 'Dodavanje' %}
+{% set title = titlePrefix ~ ' video' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    {% set trans = null %}
+
+    {% include 'Admin/Components/breadcrumbs.html.twig' with {
+        activePage: title,
+        pages: [
+            {routeName: 'admin.video_page', name: 'Video'}
+        ]
+    } %}
+
+    {% import 'Admin/Macros/Inputs/formWithLabels.html.twig' as form %}
+
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
+        <div>
+            <h4 class="mb-3 mb-md-0">{{ title }}</h4>
+        </div>
+    </div>
+
+    <form id="edit_form" enctype="multipart/form-data">
+        {{ form.input('', '_csrf_token', csrf_token('set_token'), '_csrf_token', '', 'hidden') }}
+        {% for language in languages %}
+            {% set trans = IS_EDIT ? video.translationByLocale(language.code) : '' %}
+            <div class="row">
+                <div class="col-md-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ language.name|upper }}</h6>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        {{ form.input('Naziv', 'title_'~language.code, IS_EDIT ? trans.title : '', 'title_'~language.code) }}
+                                    </div>
+                                </div><!-- Col -->
+                            </div><!-- Row -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        {{ form.textarea('Opis', 'description_'~language.code, IS_EDIT ? trans.description : '', 'description_'~language.code, 10, '', 'form-control') }}
+                                    </div>
+                                </div><!-- Col -->
+                            </div><!-- Row -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">Video</h6>
+                        <div class="row">
+                            {% include 'Admin/Components/youtube.html.twig' %}
+                        </div><!--Row-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{ form.button('submit_btn', 'btn btn-outline-primary submit', 'Sačuvaj', 'button') }}
+{#        <div class="row">#}
+{#            <div class="col-md-12 stretch-card">#}
+{#                <div class="card">#}
+{#                    <div class="card-body">#}
+{#                        <div class="row">#}
+{#                            <div class="col-sm-6 col-md-4">#}
+{#                                <div class="form-group">#}
+{#                                    {{ form.select('Valuta', 'currency', 'currency', IS_EDIT ? currency.code : '', currencies, '', 'w-100') }}#}
+{#                                </div>#}
+{#                            </div><!-- Col -->#}
+{#                            <div class="col-sm-6 col-md-4">#}
+{#                                <div class="form-group">#}
+{#                                    {{ form.input('Srednji kurs', 'exchange_rate', IS_EDIT ? currency.rate | decimal_formatter() : '1.00', 'exchangeRate') }}#}
+{#                                </div>#}
+{#                            </div><!-- Col -->#}
+{#                        </div><!-- Row -->#}
+{#                        {{ form.button('submit_button', 'btn btn-primary submit', 'Sačuvaj', 'button') }}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+    </form>
+{% endblock %}
+{% block pageStylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('build/css/admin/videoEdit.css') }}"/>
+{% endblock %}
+{% block pageJavascript %}
+    <script nonce="{{ csp_nonce('script') }}">
+        const IS_EDIT = {{ app.request.attributes.has('id') ? 1 : 0 }};
+        const ID = '{{ app.request.attributes.get('id') }}';
+        const YOUTUBE_API_KEY = '{{ youtube_api_key }}'
+    </script>
+{% endblock %}

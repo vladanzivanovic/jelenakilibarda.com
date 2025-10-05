@@ -1,0 +1,21 @@
+controllers_site:
+    resource: ../../src/Controller/Site/
+    type: annotation
+    prefix:
+        rs: ''
+        en: '/en'
+
+controllers_unique:
+    resource: ../../src/Controller/Unique/
+    type: annotation
+
+controllers_admin:
+    resource: ../../src/Controller/Admin/
+    type: annotation
+    prefix: /admin
+    options:
+        expose: true
+
+kernel:
+    resource: ../../src/Kernel.php
+    type: annotation

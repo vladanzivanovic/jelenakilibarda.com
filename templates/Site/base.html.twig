@@ -1,0 +1,102 @@
+{% set locale = app.request.locale %}
+{% set user = app.user %}
+{% set routeName = app.request.attributes.get('_route') %}
+{% set siteSettings = settings() %}
+{% set transUrls = languages %}
+
+{% if routeName is null %}
+    {% set routeName = 'site.home_page' %}
+{% endif %}
+
+{% set routeParams = {'_locale': default_locale} %}
+
+{% for language in languages %}
+    {% set language = language|merge({'url': url_locale(routeName, routeParams, locale, language.code)}) %}
+    {% set transUrls = transUrls|merge({(language.code): language}) %}
+{% endfor %}
+
+{% import 'Site/Macros/externalServices.html.twig' as externals %}
+
+<!DOCTYPE html>
+<!-- Change the value of lang="en" attribute if your website's language is not English.
+You can find the code of your language here - https://www.w3schools.com/tags/ref_language_codes.asp -->
+<html lang="{{ locale|split('_')[0] }}">
+    <head>
+        <title>{% block title %}{{ 'default_title' | trans }}{% endblock %}</title>
+        <meta name="description" content="">
+        <meta charset="utf-8">
+        <meta name="author" content="Vladan Zivanovic">
+        <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- Favicons -->
+        <link rel="shortcut icon" href="images/favicon.png">
+
+        <!-- CSS -->
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('css/site/app') }}
+        {% endblock %}
+        {% block pageStyleSheets %}{% endblock %}
+
+        {% if app.environment == 'prod' %}
+            {{ externals.googleAnalytics() }}
+        {% endif %}
+    </head>
+    <body class="{% block bodyClass %}{% endblock %} eupopup eupopup-bottom">
+        <!-- Page Loader -->
+        <div class="page-loader">
+            <div class="loader">Loading...</div>
+        </div>
+        <!-- End Page Loader -->
+
+        <!-- Page Wrap -->
+        <div class="page" id="top">
+            <!-- Navigation panel -->
+            {{ include('Site/Components/header.html.twig') }}
+            <!-- End Navigation panel -->
+
+            {% block content %}{% endblock %}
+
+            <!-- Footer -->
+            {{ include('Site/Components/footer.html.twig') }}
+            <!-- End Footer -->
+        </div>
+        <!-- End Page Wrap -->
+
+        {% block javascripts %}
+            <script nonce="{{ csp_nonce('script') }}" type="text/javascript">
+                const LOCALE = '{{ locale }}';
+                const ROUTE_NAME = '{{ routeName }}';
+                const IS_MOBILE = window.matchMedia("only screen and (max-width: 760px)").matches;
+                {#const GOOGLE_RECAPTCHA_KEY_SITE  = '{{ 'GOOGLE_RECAPTCHA_KEY_SITE' | getenv }}';#}
+                const APP_ENV = '{{ 'APP_ENV' | getenv }}';
+                {#const SENTRY_DSN = '{{ 'SENTRY_JAVASCRIPT_DSN' | getenv }}';#}
+                const DEFAULT_ALT_TAG = '{{ default_alt_tag }}';
+                const LANGUAGES = JSON.parse('{{ languages | json_encode | raw }}');
+                const SITE_SETTINGS = JSON.parse('{{ siteSettings | json_encode | raw }}')
+                const TEXTS = JSON.parse('{{ site_info_texts | json_encode | raw }}');
+                const TRANS_URLS = {{ transUrls | json_encode | raw }};
+
+                window.USER = null;
+
+                {% if user is not null %}
+                    window.USER = {
+                        id: {{ user.id }},
+                    };
+                {% endif %}
+
+                window.Messages = {{ app.session.flashBag.get('message')|json_encode|raw }};
+                window.MessagesInfo = {{ app.session.flashBag.get('message-info')|json_encode|raw }};
+                // const LANG_MAPPER = {'rs': 'sr_RS', 'en': 'en_US'};
+            </script>
+            <script type="text/javascript" src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script type="text/javascript" src="{{ url('bazinga_jstranslation_js', { 'domain': 'messages', 'locales': locale_codes()|join(',') }) }}"></script>
+            <script type="text/javascript" src="{{ url('bazinga_jstranslation_js', { 'domain': 'validators', 'locales': locale_codes()|join(',') }) }}"></script>
+            {{ encore_entry_script_tags('js/site/core') }}
+            <script type="text/javascript" src="{{ asset('js/router.min.js') }}"></script>
+            <script type="text/javascript" src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        {% endblock %}
+        {% block pageJavascript %}{% endblock %}
+        {{ externals.chat() }}
+    </body>
+</html>

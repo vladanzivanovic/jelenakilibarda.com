@@ -1,0 +1,103 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+imports:
+    - { resource: "../vendor/beberlei/doctrineextensions/config/mysql.yml" }
+parameters:
+    locales: '%env(resolve:LOCALES)%'
+    upload_dir: '%kernel.project_dir%/storage/'
+    upload_tmp_dir: 'tmp/'
+    upload_image_dir: 'image/'
+    upload_import_dir: 'import/images/'
+    upload_document_dir: 'documents/'
+    url: '%env(resolve:SITE_SCHEME)%://%env(resolve:URL)%/'
+    youtube_api_key: '%env(resolve:YOUTUBE_API_KEY)%'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        bind:
+            $languages: '%languages%'
+            $defaultLocale: '%env(string:DEFAULT_LOCALE)%'
+            $siteInfoTexts: '%site_info_texts%'
+            $youtubeApiKey: '%youtube_api_key%'
+            $siteUrl: '%env(resolve:SITE_URL)%'
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\Parser\SliderEditRequestParser: ~
+    App\Parser\DescriptionRequestParser: ~
+    App\Parser\VideoEditRequestParser: ~
+
+    App\Parser\RequestParserInterface $sliderEditRequestParser: '@App\Parser\SliderEditRequestParser'
+    App\Parser\RequestParserInterface $descriptionRequestParser: '@App\Parser\DescriptionRequestParser'
+    App\Parser\RequestParserInterface $videoEditRequestParser: '@App\Parser\VideoEditRequestParser'
+
+    App\Repository\ExtendedEntityRepository:
+        arguments:
+            $entityClass: ~
+
+    App\Handler\BaseSaveHandler:
+        arguments:
+            $objectManager: '@doctrine.orm.default_entity_manager'
+
+    App\Handler\BaseRemoveHandler:
+        arguments:
+            $objectManager: '@doctrine.orm.default_entity_manager'
+
+    Liip\ImagineBundle\Service\FilterService:
+        alias: 'liip_imagine.service.filter'
+
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+
+    App\EventListener\ImageFileSystemListener:
+        class: App\EventListener\ImageFileSystemListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
+            - { name: doctrine.event_listener, event: postUpdate }
+
+    App\EventListener\RequestListener:
+        class: App\EventListener\RequestListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.request }
+
+    App\EventListener\ResponseListener:
+        class: App\EventListener\ResponseListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.response }
+
+    App\EventListener\LocaleSubscriber:
+        arguments:
+            - '%env(string:DEFAULT_LOCALE)%'
+
+    app.sitemap_static_listener:
+        class: App\EventListener\SiteMapStaticPagesSubscriber
+        tags:
+            - { name: "kernel.event_subscriber", priority: 100 }

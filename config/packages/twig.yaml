@@ -1,0 +1,11 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    globals:
+        default_alt_tag: 'Elipsa - modna kuca'
+        default_title_tag: 'Elipsa - modna kuca'
+        default_locale: '%env(string:DEFAULT_LOCALE)%'
+        languages: '%languages%'
+        site_info_texts: '%site_info_texts%'
+        fb_id: '%env(resolve:FB_ID)%'
+        youtube_api_key: '%youtube_api_key%'
+        site_categories: '%site_categories%'

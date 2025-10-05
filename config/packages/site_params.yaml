@@ -1,0 +1,96 @@
+parameters:
+  site_info:
+    url: '%env(resolve:SITE_URL)%'
+  file_types:
+    images:
+      1: 'jpg'
+      2: 'jpeg'
+      3: 'png'
+      4: 'gif'
+  languages:
+    rs:
+      name: Srpski
+      code: rs
+      currencyCode: RSD
+    en:
+      name: Engleski
+      code: en
+      currencyCode: EUR
+  site_categories:
+    home: navi.home
+    biography: navi.biography
+    gallery: navi.images
+    videos: navi.video
+  site_info_texts:
+    cookie_policy:
+      title: navi.cookie_policy
+      type: cookie_policy
+      path: site.cookie_policy
+      slug:
+        hr: politika-kolacica
+        de: cookie-politik
+        en: cookie-policy
+    use_conditions:
+      title: navi.use_conditions
+      type: use_conditions
+      path: site.use_conditions
+      slug:
+        hr: uslovi-koriscenja
+        de: einsatz-bedingungen
+        en: use-conditions
+    policy_and_privacy:
+      title: navi.policy_and_privacy
+      type: policy_and_privacy
+      path: site.policy_page
+      slug:
+        hr: politika-privatnosti
+        de: datenschutz-bestimmungen
+        en: privacy-policy
+    data_security:
+      title: navi.data_security
+      type: data_security
+      path: site.data_security
+      slug:
+        hr: zastita-podataka
+        de: datenschutz
+        en: data-protection
+    payment_types:
+      title: navi.payment_types
+      type: payment_types
+      path: site.payment_types
+      slug:
+        hr: nacin-placanja
+        de: zahlungsart
+        en: payment-methods
+    pre_contract_notice:
+      title: navi.pre_contract_notice
+      type: pre_contract_notice
+      path: site.pre_contract_notice
+      slug:
+        hr: predugovorna-obavijest
+        de: vorvertragliche-mitteilung
+        en: pre-contractual-notice
+    online_security_payment_statement:
+      title: navi.online_security_payment_statement
+      type: online_security_payment_statement
+      path: site.online_security_payment_statement
+      slug:
+        hr: sigurnost-online-placanja
+        de: zahlungs-und-liefersicherheit
+        en: security-of-payment-and-delivery
+    delivery_and_return:
+      title: navi.delivery_and_return
+      type: delivery_and_return
+      path: site.delivery_and_return
+      slug:
+        hr: dostava-i-povrat
+        de: zahlungs-und-liefersicherheit
+        en: security-of-payment-and-delivery
+    documents:
+      title: navi.documents
+      type: documents
+      path: site.documents
+      slug:
+        hr: dokumenti
+        de: unterlagen
+        en: documents

@@ -1,0 +1,103 @@
+{% extends ('Site/base.html.twig') %}
+
+{% block bodyClass %}biography{% endblock %}
+
+{% set title = {
+    'site.biography_page': 'navi.biography' | trans,
+    'site.repertoire_page': 'navi.repertoire' | trans,
+    'site.piano_duo_page': 'navi.piano_duo' | trans,
+    } %}
+
+{% block content %}
+    <main id="main">
+        <!-- Home Section -->
+        {% set bgImage = asset('build/site/images/background/section-bg-19.jpg') %}
+
+        {% if slider is not null %}
+            {% set bgImage = slider.image_link %}
+        {% endif %}
+
+        <section class="page-section bg-dark-alfa-50 bg-scroll" data-background="{{ bgImage }}" id="home">
+            <div class="container relative">
+
+                <div class="row">
+
+                    <div class="col-md-8">
+                        <div class="wow fadeInUpShort" data-wow-delay=".1s">
+                            <h1 class="hs-line-7 mb-20 mb-xs-10">{{ title[routeName] }}</h1>
+                        </div>
+{#                        <div class="wow fadeInUpShort" data-wow-delay=".2s">#}
+{#                            <p class="hs-line-6 opacity-075 mb-20 mb-xs-0">#}
+{#                                Extraordinary art team &&nbsp;creative minimalism lovers#}
+{#                            </p>#}
+{#                        </div>#}
+                    </div>
+
+                    <div class="col-md-4 mt-30 wow fadeInUpShort" data-wow-delay=".1s">
+                        {% include 'Site/Components/breadcrumbs.html.twig' with {
+                            activePage: title[routeName]
+                        } %}
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+        <!-- End Home Section -->
+
+        <!-- Section -->
+        <section class="page-section">
+            <div class="container relative">
+
+                <div class="row">
+
+                    <!-- Content -->
+                    <div class="col-lg-8 offset-lg-2 mb-sm-80">
+
+                        <!-- Post -->
+                        <div class="blog-item mb-80 mb-xs-40">
+
+                            <!-- Text -->
+                            <div class="blog-item-body">
+                                {{ biography is not null ? biography.description | raw : '' }}
+                            </div>
+                            <!-- End Text -->
+
+                        </div>
+                        <!-- End Post -->
+
+                        <!-- Photo Grid -->
+                        <div class="row mb-30 mb-xs-10">
+
+                            {% for image in images %}
+                                <!-- Photo Item -->
+                                <div class="col-md-4">
+
+                                    <div class="post-prev-img mb-30 wow fadeScaleIn" data-wow-duration="1s">
+                                        <a href="{{ image.file }}" class="lightbox-gallery-2 mfp-image">
+                                            <img src="{{ image.thumb_image }}" alt="{{ default_alt_tag }}" />
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <!-- End Photo Item -->
+                            {% endfor %}
+
+                        </div>
+                        <!-- End Photo Grid -->
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!-- End Section -->
+
+{#        {{ include('Site/Components/contact.html.twig') }}#}
+
+    </main>
+{% endblock %}
+{% block pageStyleSheets %}
+    {{ encore_entry_link_tags('css/site/pages/description') }}
+{% endblock %}
+
