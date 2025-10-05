@@ -68,6 +68,7 @@ nelmio_security:
                 - 'data:'
                 - 'https://www.google.com'
                 - 'https://www.google.rs'
+                - 'https://i.ytimg.com'
             connect-src:
                 - 'self'
                 - 'https://o419240.ingest.sentry.io'
